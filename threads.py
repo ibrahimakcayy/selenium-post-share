@@ -83,4 +83,3 @@ def share_tweet(thread_text,photo_url="None"):
     driver.find_element(By.XPATH,xpaths("t-xpath",6)).click()  
 
     print("Thread shaerd")
-
