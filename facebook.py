@@ -29,19 +29,28 @@ def openurl(url):
     print("Webpage opened")
 
 
+#get xpaths from notepad
+def xpaths(name,paths):
+    f=open(f"{name}.txt","r")
+    raw_xpaths=list(f.read().split("\n"))
+    f.close()
+    b=[i.split(":")[1] for i in raw_xpaths]
+    return(b[paths])
+
+
 #login webpage
 def login(usrn,passw):
     
     #write username
-    driver.find_element(By.XPATH,'/html/body/div[1]/div[1]/div[1]/div/div/div/div[2]/div/div[1]/form/div[1]/div[1]/input').send_keys(usrn)
+    driver.find_element(By.XPATH,xpaths("f-xpath",0)).send_keys(usrn)
     time.sleep(0.3)
     
     #write password 
-    driver.find_element(By.XPATH,'/html/body/div[1]/div[1]/div[1]/div/div/div/div[2]/div/div[1]/form/div[1]/div[2]/div/input').send_keys(passw)
+    driver.find_element(By.XPATH,xpaths("f-xpath",1)).send_keys(passw)
     time.sleep(0.3)
     
     #click login button
-    driver.find_element(By.XPATH,'/html/body/div[1]/div[1]/div[1]/div/div/div/div[2]/div/div[1]/form/div[2]/button').click()
+    driver.find_element(By.XPATH,xpaths("f-xpath",2)).click()
     time.sleep(1)
 
     print("Logged in")
@@ -53,25 +62,25 @@ def share_post(text,photo_url="None"):
     print("Start Sharing")
     
     #share post button click
-    driver.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div[2]/div/div/div/div[3]/div/div[2]/div/div/div/div[1]/div/div[1]').click()
+    driver.find_element(By.XPATH,xpaths("f-xpath",3)).click()
     time.sleep(20)
 
     #if you choose photo+text mode active this section
     if photo_url!="None":
 
         #open drop img section
-        driver.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div/div/div[3]/div[1]/div[2]/div/div[1]/div').click()
+        driver.find_element(By.XPATH,xpaths("f-xpath",4)).click()
         time.sleep(1)
 
         #upload img
-        driver.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div/div/div[2]/div[1]/div[2]/div/div[1]/div/div/input').send_keys(photo_url)
+        driver.find_element(By.XPATH,xpaths("f-xpath",5)).send_keys(photo_url)
         time.sleep(2)
 
     #write text
-    driver.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div/div/div[2]/div[1]/div[1]/div[1]/div/div/div[1]').send_keys(text)
+    driver.find_element(By.XPATH,xpaths("f-xpath",6)).send_keys(text)
     time.sleep(1)
     
     #click share button
-    driver.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div/div/div[3]/div[2]/div').click()
+    driver.find_element(By.XPATH,xpaths("f-xpath",7)).click()
     
     print("Post Shared")
