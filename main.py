@@ -1,20 +1,24 @@
 #import all libraries
-import instagram
-import time
-import facebook
 import twitter
+import instagram
+import facebook
+import threads
+import time
 from selenium import webdriver as web
 
+#URL etc: C:\Users\ASUS\Desktop\a\wall.jpg
 
 #import check
-print(instagram.cont(),twitter.cont(),facebook.cont(),"\n")
-driver=web.Chrome()
+print(instagram.cont(),twitter.cont(),facebook.cont(),threads.cont(),"\n")
+options = web.EdgeOptions()
+driver = web.Edge(options=options)
 time.sleep(5)
 
 #set all integer to 0
 twtrlogged=0
 instalogged=0
 facelogged=0
+thrdlogged=0
 
 #counter function
 def count():
@@ -42,6 +46,7 @@ def secrets(check):
     insta=accnt[0].split(" ")
     twtr=accnt[1].split(" ")
     face=accnt[2].split(" ")
+    thrd=accnt[3].split(" ")
 
     if check=="instausrn":
         return insta[1]
@@ -59,7 +64,13 @@ def secrets(check):
         return face[1]
     
     elif check=="facepass":
-        return face[2] 
+        return face[2]
+    
+    elif check=="thrdusrn":
+        return thrd[1]
+    
+    elif check=="thrdpass":
+        return thrd[2] 
 
 
 #main activity
@@ -68,9 +79,9 @@ while True:
     try:
         
         #select platform
-        choose =input("Twitter(t/twitter) || Instagram(i/instagram) || Facebook(f/facebook) || Quit(q/quit): ")
+        choose =input("Twitter(x/twitter) || Instagram(i/instagram) || Facebook(f/facebook) || Threads(t/threads) || Quit(q/quit): ")
  
-        if choose.lower()=="twitter" or choose.lower()=="t":
+        if choose.lower()=="twitter" or choose.lower()=="x":
             
             #write caption of post
             caption=input("Write caption: ")
@@ -111,7 +122,7 @@ while True:
             elif post_mode.lower()=="photo" or post_mode.lower()=="p":
 
                 #enter photo url (don't forget double \\)
-                img_url=input("Enter photo url(don't forget revers slash to double): ")
+                img_url=input("Enter photo url: ")
 
                 #if already logged in this will be activated
                 if twtrlogged:
@@ -149,7 +160,7 @@ while True:
             caption=input("Write caption: ")
             
             #enter photo url (don't forget double \\)
-            img_url=input("Enter photo url(don't forget revers slash to double): ")
+            img_url=input("Enter photo url: ")
 
             #if already logged in this will be activated
             if instalogged:
@@ -218,7 +229,7 @@ while True:
             elif post_mode.lower()=="photo" or post_mode.lower()=="p":
                 
                 #enter photo url (don't forget double \\)
-                img_url=input("Enter photo url(don't forget revers slash to double): ")
+                img_url=input("Enter photo url: ")
 
                 #if already logged in this will be activated
                 if facelogged:
@@ -245,6 +256,79 @@ while True:
                 #share facebook post with photo
                 time.sleep(10)    
                 facebook.share_post(caption+str(count()),img_url)
+
+            else:
+                
+               print("Invalid selection")
+               
+        elif choose.lower()=="threads" or choose.lower()=="t":
+            
+            #write caption of post
+            caption=input("Write caption: ")
+            
+            #select threads mode
+            post_mode=input("Normal(n/normal) || With Photo(p/photo): ")
+
+            #if select normal mode this will be activated
+            if post_mode.lower()=="normal" or post_mode.lower()=="n":
+                
+                #if already logged in this will be activated
+                if thrdlogged:
+
+                    #open threads
+                    threads.openurl("https://www.threads.net/")
+                    print("Already logged in")
+                    
+                else:
+
+                    #open chromedriver
+                    threads.drivers(driver)
+                    
+                    #open threads
+                    threads.openurl("https://www.threads.net/login?show_choice_screen=false")
+                    time.sleep(8)
+
+                    #login threads
+                    threads.login(secrets("thrdusrn"),secrets("thrdpass"))
+
+                    #login check set 1
+                    thrdlogged=1
+
+                #share normal thread
+                time.sleep(15)
+                threads.share_thread(caption+str(count()))
+
+            #if select photo mode this will be activated
+            elif post_mode.lower()=="photo" or post_mode.lower()=="p":
+
+                #enter photo url (don't forget double \\)
+                img_url=input("Enter photo url: ")
+
+                #if already logged in this will be activated
+                if thrdlogged:
+
+                    #open twitter
+                    threads.openurl("https://www.threads.net/")
+                    print("Already logged in")
+                    
+                else:
+
+                    #open chromedriver
+                    threads.drivers(driver)
+                    
+                    #open threads
+                    threads.openurl("https://www.threads.net/login?show_choice_screen=false")
+                    time.sleep(8)
+
+                    #login threads
+                    threads.login(secrets("thrdusrn"),secrets("thrdpass"))
+
+                    #login check set 1
+                    thrdlogged=1
+
+                #share thread with photo
+                time.sleep(15)
+                threads.share_thread(caption+str(count()),img_url)
 
             else:
                 
