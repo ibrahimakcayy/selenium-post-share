@@ -29,23 +29,32 @@ def openurl(url):
     print("Webpage opened")
 
 
+#get xpaths from notepad
+def xpaths(name,paths):
+    f=open(f"{name}.txt","r")
+    raw_xpaths=list(f.read().split("\n"))
+    f.close()
+    b=[i.split(":")[1] for i in raw_xpaths]
+    return(b[paths])
+
+
 #login twitter
 def login(usern,passw):
     
     #write username
-    driver.find_element(By.XPATH,'/html/body/div/div/div/div[1]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div/div/div/div[5]/label/div/div[2]/div/input').send_keys(usern)
+    driver.find_element(By.XPATH,xpaths("x-xpath",0)).send_keys(usern)
     time.sleep(0.3)
 
     #click next button
-    driver.find_element(By.XPATH,'/html/body/div/div/div/div[1]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div/div/div/div[6]').click()
+    driver.find_element(By.XPATH,xpaths("x-xpath",1)).click()
     time.sleep(5)
 
     #write password
-    driver.find_element(By.XPATH,'/html/body/div/div/div/div[1]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div/div[3]/div/label/div/div[2]/div[1]/input').send_keys(passw)
+    driver.find_element(By.XPATH,xpaths("x-xpath",2)).send_keys(passw)
     time.sleep(0.3)
 
     #click login button
-    driver.find_element(By.XPATH,'/html/body/div/div/div/div[1]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div/div[1]/div/div/div').click()
+    driver.find_element(By.XPATH,xpaths("x-xpath",3)).click()
     time.sleep(1)
 
     print("Logged in")
@@ -60,18 +69,17 @@ def share_tweet(tweet_text,photo_url="None"):
     print("Start Sharing")
 
     #write tweet
-    driver.find_element(By.XPATH,'/html/body/div[1]/div/div/div[2]/main/div/div/div/div[1]/div/div[3]/div/div[2]/div[1]/div/div/div/div[2]/div[1]/div/div/div/div/div/div/div/div/div/div/label/div[1]/div/div/div/div/div/div[2]/div').send_keys(tweet_text)
+    driver.find_element(By.XPATH,xpaths("x-xpath",4)).send_keys(tweet_text)
     time.sleep(1)
 
     #if you want to tweet with photo photo_url chage false to url
     if photo_url!="None":
         
         #enter photo
-        driver.find_element(By.XPATH,'/html/body/div[1]/div/div/div[2]/main/div/div/div/div[1]/div/div[3]/div/div[2]/div[1]/div/div/div/div[2]/div[2]/div[2]/div/div/div[1]/input').send_keys(photo_url)
+        driver.find_element(By.XPATH,xpaths("x-xpath",5)).send_keys(photo_url)
         time.sleep(8)
 
     #tweet button
-    driver.find_element(By.XPATH,'/html/body/div[1]/div/div/div[2]/main/div/div/div/div[1]/div/div[3]/div/div[2]/div[1]/div/div/div/div[2]/div[2]/div[2]/div/div/div[2]/div[3]').click()  
+    driver.find_element(By.XPATH,xpaths("x-xpath",6)).click()  
 
     print("Tweet shaerd")
-
