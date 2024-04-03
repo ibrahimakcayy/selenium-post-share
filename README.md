@@ -1,14 +1,14 @@
-# selenium-instagram-facebook-twitter
-# Python Selenium auto post share in Instagram, Facebook, Twitter
+# selenium-twitter-instagram-facebook-threads
+# Python Selenium auto post share in Twitter, Instagram, Facebook, Threads
 
-share post in multiple platforms (Instagram, Facebook, Twitter)
+share post in multiple platforms (Twitter, Instagram, Facebook, Threads)
 
 required libraries selenium, time
 
 pip install selenium
 
-chrome webdriver
+edge webdriver
 
-secrets.txt and count.txt must same folder with main.py
+All txt's must be in same folder with main.py
 
-xpaths and times migth be change on differnt devices u can change 
+xpaths and times migth be change on differnt devices. It can be changeable. 
