@@ -6,7 +6,6 @@ import threads
 import time
 from selenium import webdriver as web
 
-#URL etc: C:\Users\ASUS\Desktop\a\wall.jpg
 
 #import check
 print(instagram.cont(),twitter.cont(),facebook.cont(),threads.cont(),"\n")
@@ -307,7 +306,7 @@ while True:
                 #if already logged in this will be activated
                 if thrdlogged:
 
-                    #open twitter
+                    #open threads
                     threads.openurl("https://www.threads.net/")
                     print("Already logged in")
                     
