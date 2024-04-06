@@ -41,7 +41,7 @@ def secrets(check):
     accnt=list(f.read().split("\n"))
     f.close()
 
-    #set all username and password || 1. instagram: username password || 2. twitter: username password || 3. facebook: email password
+    #set all username and password || 1. instagram: username password || 2. twitter: username password || 3. facebook: email password || 4. threads: username password ||
     insta=accnt[0].split(" ")
     twtr=accnt[1].split(" ")
     face=accnt[2].split(" ")
@@ -284,8 +284,8 @@ while True:
                     threads.drivers(driver)
                     
                     #open threads
-                    threads.openurl("https://www.threads.net/login?show_choice_screen=false")
-                    time.sleep(8)
+                    threads.openurl("https://www.threads.net/login")
+                    time.sleep(10)
 
                     #login threads
                     threads.login(secrets("thrdusrn"),secrets("thrdpass"))
@@ -316,7 +316,7 @@ while True:
                     threads.drivers(driver)
                     
                     #open threads
-                    threads.openurl("https://www.threads.net/login?show_choice_screen=false")
+                    threads.openurl("https://www.threads.net/login")
                     time.sleep(8)
 
                     #login threads
