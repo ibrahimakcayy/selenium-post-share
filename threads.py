@@ -39,10 +39,15 @@ def xpaths(name,paths):
 
 
 #login threads
-def login(usern,passw):
+def login(usrn,passw):
+
+
+    #go instagram
+    driver.find_element(By.XPATH,xpaths("t-xpath",7)).click()
+    time.sleep(5)
     
     #write username
-    driver.find_element(By.XPATH,xpaths("t-xpath",0)).send_keys(usern)
+    driver.find_element(By.XPATH,xpaths("t-xpath",0)).send_keys(usrn)
     time.sleep(0.3)
 
     #write password
@@ -57,11 +62,11 @@ def login(usern,passw):
 
 
 #share threads (with pic or without)
-def share_tweet(thread_text,photo_url="None"):
+def share_thread(thread_text,photo_url="None"):
 
     #again open threads
     driver.get("https://threads.net/")
-    time.sleep(5)
+    time.sleep(8)
     print("Start Sharing")
 
     #open thread popup
